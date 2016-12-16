@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="lee" extends="struts-default">
+		<interceptors>
+			<interceptor name="MethodInterceptor" class="org.will.service.interceptor.MethodInterceptor">
+				<param name="name">simple</param>
+			</interceptor>
+		</interceptors>
+		
+		<action name="login" class="org.will.service.action.LoginAction">		
+			<result>/WEB-INF/content/welcome.jsp</result>			
+			<result name="error">/WEB-INF/content/loginForm.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="MethodInterceptor">
+				<param name="name">hah</param>
+				<param name="excludeMethods"></param>
+				<param name="includeMethods">execute</param>
+			</interceptor-ref>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/{1}.jsp</result>
+		</action>
+	</package>
+</struts>
